@@ -1,18 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { auth } from "./firebase/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const testSignup = async () => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        "testuser@gmail.com",
+        "password123"
+      );
+      console.log("User created");
+      alert("User created successfully!");
+    } catch (error) {
+      console.error(error.message);
+      alert(error.message);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <h1>Event Management</h1>
-      </div>
-    </>
-  )
+    <div style={{ padding: "20px" }}>
+      <h1>Event Management System</h1>
+      <button onClick={testSignup}>Test Firebase Auth</button>
+    </div>
+  );
 }
 
-export default App
+export default App;
