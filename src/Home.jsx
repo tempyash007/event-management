@@ -19,10 +19,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-yellow-400 selection:text-black">
-      {/* Navigation */}
-      
 
-      {/* Hero Section */}
       <main className="flex flex-col items-center justify-center pt-20 pb-12 px-6 text-center">
         <div className="inline-block px-3 py-1 mb-6 border border-yellow-400 text-yellow-400 text-[10px] uppercase font-bold tracking-[0.3em] rounded-full">
           Welcome Back
@@ -51,7 +48,6 @@ const Home = () => {
         </div>
       </main>
 
-      {/* Featured Card Section */}
       <section className="px-6 py-20 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-6">
         {[1, 2, 3].map((item) => (
           <div key={item} className="group p-8 bg-[#111] border border-gray-900 rounded-3xl hover:border-yellow-400/50 transition-all">

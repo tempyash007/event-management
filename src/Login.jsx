@@ -32,16 +32,6 @@ export default function Login() {
     }
   }
 
-  const Logout = async () => {
-    try {
-      await signOut(auth);
-    }
-    catch (error) {
-      console.error("Error Logout:", error);
-    }
-  }
-
-
   const getFriendlyErrorMessage = (code) => {
       switch (code) {
     case 'auth/invalid-credential': 
@@ -71,8 +61,7 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black p-4 font-sans text-white">
-      
-      {/* ERROR BOX - Positioned at the top of the card or screen */}
+
       {errorMsg && (
         <div className="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-md z-50 animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="bg-red-900/80 border border-red-500 text-white px-4 py-3 rounded-xl flex items-center justify-between shadow-2xl backdrop-blur-md">
@@ -94,8 +83,6 @@ export default function Login() {
         </div>
       )}
 
-      {/* Card Container */}
-      {/* Update this line in both files */}
       <div className="w-[95%] sm:w-full md:max-w-md p-6 md:p-8 space-y-6 bg-[#1a1a1a] rounded-[2rem] border border-gray-800 shadow-2xl">
         
         <div className="space-y-2">
@@ -104,7 +91,6 @@ export default function Login() {
         </div>
 
         <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-          {/* Email Input */}
           <div className="relative">
             <span className="absolute inset-y-0 left-4 flex items-center text-gray-500">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -118,8 +104,6 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-
-          {/* Password Input */}
           <div className="relative">
             <span className="absolute inset-y-0 left-4 flex items-center text-gray-500">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -151,7 +135,6 @@ export default function Login() {
           <div className="flex-grow border-t border-gray-800"></div>
         </div>
 
-        {/* Google Login Button */}
         <button className="w-full flex items-center justify-center gap-3 py-4 bg-[#242424] border border-gray-800 rounded-xl hover:bg-[#2a2a2a] transition-colors group" onClick={signInWithGoogle}>
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -165,7 +148,6 @@ export default function Login() {
         <p className="text-center text-xs text-gray-500 leading-relaxed">
           Don't have an account? <Link to="/signup" className="text-white font-medium hover:underline">Create one</Link>
         </p>
-        {/* <button className="w-full flex items-center justify-center gap-3 py-4 bg-[#242424] border border-gray-800 rounded-xl hover:bg-[#2a2a2a] transition-colors group" onClick={Logout}>Logout</button> */}
       </div>
     </div>
   );

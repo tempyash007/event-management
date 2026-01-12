@@ -6,7 +6,7 @@ import { signOut, onAuthStateChanged } from 'firebase/auth';
 const Navbar = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [successMsg, setSuccessMsg] = useState(''); // State for success message
+  const [successMsg, setSuccessMsg] = useState('');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -15,7 +15,6 @@ const Navbar = () => {
     return () => unsubscribe();
   }, []);
 
-  // Timer to hide the message after 6 seconds
   useEffect(() => {
     if (successMsg) {
       const timer = setTimeout(() => setSuccessMsg(''), 6000);
@@ -26,9 +25,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      setSuccessMsg('Successfully logged out. See you soon!'); // Set the message
-      // Note: We don't navigate immediately if we want them to see the message on the current page
-      // or we navigate to login where the navbar will still show the message.
+      setSuccessMsg('Successfully logged out. See you soon!');
       navigate('/login');
     } catch (error) {
       console.error("Logout Error:", error);

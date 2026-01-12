@@ -18,7 +18,6 @@ const Events = () => {
     }
   ];
 
-  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -30,8 +29,7 @@ const Events = () => {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
-      
-      {/* 1. CAROUSEL SECTION */}
+
       <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
         {slides.map((slide, index) => (
           <div
@@ -56,8 +54,7 @@ const Events = () => {
             </div>
           </div>
         ))}
-        
-        {/* Carousel Indicators */}
+
         <div className="absolute bottom-6 right-12 z-30 flex gap-2">
           {slides.map((_, i) => (
             <div 
@@ -68,7 +65,6 @@ const Events = () => {
         </div>
       </div>
 
-      {/* 2. CATEGORIES SECTION */}
       <section className="py-16 px-6 md:px-12">
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-2xl font-black uppercase border-l-4 border-yellow-400 pl-4">
@@ -90,7 +86,6 @@ const Events = () => {
         </div>
       </section>
 
-      {/* 3. EVENT GRID (Sample) */}
       <section className="pb-20 px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-[#111] rounded-2xl overflow-hidden border border-gray-800 hover:border-yellow-400 transition-colors">
           <div className="h-48 bg-gray-800" />

@@ -33,7 +33,6 @@ function App() {
     <Router>
       <LayoutWrapper>
       <div className="flex flex-col min-h-screen bg-black">
-        {/* <Navbar />  */}
         
         <main className="flex-grow">
           <Routes>
@@ -41,7 +40,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             
-            {/* Protected Routes */}
             <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
             
@@ -49,7 +47,6 @@ function App() {
           </Routes>
         </main>
 
-        {/* <Footer /> */}
       </div>
       </LayoutWrapper>
     </Router>

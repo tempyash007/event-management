@@ -51,7 +51,6 @@ function Signup() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-black p-4">
 
-      {/* ERROR BOX - Positioned at the top of the card or screen */}
       {errorMsg && (
         <div className="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-md z-50 animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="bg-red-900/80 border border-red-500 text-white px-4 py-3 rounded-xl flex items-center justify-between shadow-2xl backdrop-blur-md">
@@ -78,7 +77,6 @@ function Signup() {
         <h2 className="text-2xl font-semibold text-white">Create an account</h2>
 
         <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-          {/* Name Row */}
           <div className="flex flex-col md:flex-row gap-3">
             <input
               type="text"
@@ -94,7 +92,6 @@ function Signup() {
             />
           </div>
 
-          {/* Email Input */}
           <div className="relative">
             <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -109,7 +106,6 @@ function Signup() {
             />
           </div>
 
-          {/* Password Input (Crucial for Signup) */}
           <input
             type="password"
             placeholder="Create a password"
