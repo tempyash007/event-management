@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, googleProvider } from './firebase/firebaseConfig';
+import { auth, googleProvider, db } from './firebase/firebaseConfig';
 import { signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
@@ -10,53 +11,78 @@ export default function Login() {
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
   console.log(auth?.currentUser?.email);
+
+  const redirectBasedOnRole = async (uid) => {
+    try {
+      const userDoc = await getDoc(doc(db, 'users', uid));
+      if (userDoc.exists()) {
+        const role = userDoc.data().role;
+        if (role === 'organizer') {
+          navigate('/organizer-dashboard'); // Organizer dashboard
+        } else {
+          navigate('/home'); // Regular user
+        }
+      } else {
+        // fallback if somehow user document does not exist
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Error fetching user role:', error);
+      navigate('/home');
+    }
+  };
+
+
   const signIn = async () => {
     try {
       setErrorMsg('');
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate('/home');
-    }
-    catch (error) {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      await redirectBasedOnRole(userCredential.user.uid);
+    } catch (error) {
       setErrorMsg(getFriendlyErrorMessage(error.code));
     }
-  }
+  };
 
   const signInWithGoogle = async () => {
     try {
       setErrorMsg('');
-      await signInWithPopup(auth, googleProvider);
-      navigate('/home');
-    }
-    catch (error) {
+      const userCredential = await signInWithPopup(auth, googleProvider);
+      await redirectBasedOnRole(userCredential.user.uid);
+    } catch (error) {
       setErrorMsg(getFriendlyErrorMessage(error.code));
     }
+  };
+
+  const ResetPassword = () => {
+    navigate('/ResetPassword');
   }
 
   const getFriendlyErrorMessage = (code) => {
-      switch (code) {
-    case 'auth/invalid-credential': 
-      return 'Invalid email or password. Please try again.';
-    case 'auth/user-not-found': 
-      return 'No account found with this email.';
-    case 'auth/wrong-password': 
-      return 'Incorrect password.';
-    case 'auth/invalid-email': 
-      return 'Please enter a valid email address.';
-    case 'auth/network-request-failed': 
-      return 'Network error. Check your connection.';
-    case 'auth/too-many-requests':
-      return 'Too many failed attempts. Try again later.';
-    default:
-      console.log("Unrecognized Firebase Code:", code);
-      return 'An error occurred. Please try again.';
-  }
-    };
-    useEffect(() => {
-      if (errorMsg) {
-        const timer = setTimeout(() => setErrorMsg(''), 6000);
-        return () => clearTimeout(timer);
-      }
-    }, [errorMsg]);
+    switch (code) {
+      case 'auth/invalid-credential': 
+        return 'Invalid email or password. Please try again.';
+      case 'auth/user-not-found': 
+        return 'No account found with this email.';
+      case 'auth/wrong-password': 
+        return 'Incorrect password.';
+      case 'auth/invalid-email': 
+        return 'Please enter a valid email address.';
+      case 'auth/network-request-failed': 
+        return 'Network error. Check your connection.';
+      case 'auth/too-many-requests':
+        return 'Too many failed attempts. Try again later.';
+      default:
+        console.log("Unrecognized Firebase Code:", code);
+        return 'An error occurred. Please try again.';
+    }
+  };
+
+  useEffect(() => {
+    if (errorMsg) {
+      const timer = setTimeout(() => setErrorMsg(''), 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [errorMsg]);
 
 
   return (
@@ -119,7 +145,7 @@ export default function Login() {
           </div>
 
           <div className="flex justify-end">
-            <button className="text-xs text-blue-500 hover:text-blue-400 transition-colors">
+            <button className="text-xs text-blue-500 hover:text-blue-400 transition-colors" onClick={ResetPassword}>
               Forgot password?
             </button>
           </div>
@@ -142,7 +168,7 @@ export default function Login() {
             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
           </svg>
-          <span className="font-semibold text-sm text-gray-300 group-hover:text-white">Sign in with Google</span>
+          <span className="font-semibold text-sm text-gray-300 group-hover:text-white">Sign In with Google</span>
         </button>
 
         <p className="text-center text-xs text-gray-500 leading-relaxed">
