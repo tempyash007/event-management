@@ -6,7 +6,7 @@ The platform allows **organizers** to create and manage events, and **users (stu
 ---
 
 ## 🚀 Live Demo
-> _(Add deployed link here if available)_
+> Under Progress
 
 ---
 
