@@ -1,4 +1,4 @@
-# 🎟️ Campus Event Management System
+# 🎟️ Event Management System
 
 A full-stack **Event Management Web Application** built for a campus environment as part of **Winter of Code**.  
 The platform allows **organizers** to create and manage events, and **users (students)** to explore, like, and register for events seamlessly.
@@ -100,11 +100,33 @@ users
       ├── createdAt
 
 
+events
+ └── eventId
+      ├── title
+      ├── description
+      ├── category
+      ├── date
+      ├── duration
+      ├── location
+      ├── pricingTiers
+      ├── imageBase64
+      ├── organizerId
+      ├── likedBy
+      ├── registeredCount
+      ├── createdAt
+
+
+events/{eventId}/registrations/{userId}
+ ├── userId
+ ├── selectedTier
+ ├── registeredAt
+
+
 # Clone the repository
-git clone https://github.com/your-username/campus-event-management.git
+git clone https://github.com/your-username/event-management-system.git
 
 # Navigate to project directory
-cd campus-event-management
+cd event-management-system
 
 # Install dependencies
 npm install
