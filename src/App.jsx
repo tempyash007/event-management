@@ -11,10 +11,13 @@ import Footer from "./Footer";
 import OrganizerSignup from "./OrganizerSignup";
 import OrganizerDashboard from "./OrganizerDashboard";
 import ResetPassword from "./ResetPassword";
+import CreateEvent from "./CreateEvent";
+import ManageEvents from "./ManageEvents";
+import EventDetails from "./EventDetails";
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
-  const hideLayout = ['/login', '/signup', '/organizer-signup', '/organizer-dashboard', '/ResetPassword'].includes(location.pathname);
+  const hideLayout = ['/login', '/signup', '/organizer-signup', '/organizer-dashboard', '/ResetPassword', '/CreateEvent', '/ManageEvents'].includes(location.pathname);
 
   return (
     <div className="flex flex-col min-h-screen bg-black">
@@ -42,8 +45,11 @@ function App() {
             
             <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
+            <Route path="/EventDetails/:eventId" element={<ProtectedRoute><EventDetails /></ProtectedRoute>} />
             
             <Route path="/organizer-dashboard" element={<ProtectedRoute><OrganizerDashboard /></ProtectedRoute>} />
+            <Route path="/CreateEvent" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
+            <Route path="/ManageEvents" element={<ProtectedRoute><ManageEvents /></ProtectedRoute>} />
 
             <Route path="*" element={<div className="text-white text-center mt-20">404 - Not Found</div>} />
           </Routes>
