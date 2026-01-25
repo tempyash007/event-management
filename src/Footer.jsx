@@ -29,8 +29,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="mt-12 pt-8 border-t border-gray-900 text-[10px] text-gray-600 text-center uppercase tracking-widest">
-        © 2026 Your Company. All Rights Reserved.
+      <div className="mt-12 pt-8 border-t border-gray-900 text-[10px] text-white-600 text-center uppercase tracking-widest">
+        © 2026 <span className="text-yellow-400 tracking-tighter italic">The Bold Room.</span> All Rights Reserved.
       </div>
     </footer>
   );
