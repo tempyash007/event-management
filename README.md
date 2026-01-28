@@ -6,7 +6,7 @@ The platform allows **organizers** to create and manage events, and **users (stu
 ---
 
 ## 🚀 Live Demo
-> Under Progress
+> [Under Progress](https://event-management-28c1b.web.app)
 
 ---
 
@@ -123,7 +123,7 @@ events/{eventId}/registrations/{userId}
 
 
 # Clone the repository
-git clone https://github.com/your-username/event-management-system.git
+git clone https://github.com/your-username/event-management.git
 
 # Navigate to project directory
 cd event-management-system
